@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './DeletePerson.css';
+import '../Stylesheet/DeletePerson.css';
 
 class DeletePerson extends Component {
     constructor() {
@@ -15,7 +15,7 @@ class DeletePerson extends Component {
 
 // Lifecycle hook, runs after component has mounted onto the DOM structure
 componentDidMount() {
-  const request = new Request('http://127.0.0.1:8080/people/');
+  const request = new Request('http://127.0.0.1:9080/people/');
   fetch(request)
     .then(response => response.json())
       .then(data => this.setState({data: data}));

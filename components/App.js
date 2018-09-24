@@ -5,6 +5,8 @@ import EditPerson from './EditPerson';
 import NewPerson from './NewPerson';
 import Home from './Home';
 
+import ViewGenre from './ViewGenre';
+
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 class App extends Component {
@@ -24,6 +26,7 @@ class App extends Component {
                   <li><Link to={'/EditPerson'}>Edit Person</Link></li>
                   <li><Link to={'/DeletePerson'}>Delete Person</Link></li>
                   <li><Link to={'/ViewPeople'}>View People</Link></li>
+                  <li><Link to={'/ViewGenre'}>View Genre</Link></li>
                 </ul>
               </div>
             </nav>
@@ -33,6 +36,7 @@ class App extends Component {
                  <Route exact path='/EditPerson' component={EditPerson} />
                  <Route exact path='/DeletePerson' component={DeletePerson} />
                  <Route exact path='/ViewPeople' component={ViewPeople} />
+                 <Route exact path='/ViewGenre' component={ViewGenre} />
             </Switch>
           </div>
         </Router>
