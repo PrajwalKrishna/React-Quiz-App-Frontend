@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import '../Stylesheet/ViewGenre.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
+import GenreHome from './GenreHome';
+import Home from './Home'
+
 class ViewGenres extends Component {
   constructor() {
     super();
@@ -24,8 +27,6 @@ class ViewGenres extends Component {
         <header className="App-header">
           <h1 className="App-title">List of all genres</h1>
         </header>
-              {console.table(this.state.data)}
-
               <Router>
                 <div>
                   <nav className="navbar navbar-default">
@@ -35,15 +36,14 @@ class ViewGenres extends Component {
                       </div>
                       <ul className="nav navbar-nav">
                       {this.state.data.map(function(item, key) {
-                           return (<li><Link to={'/GenreHome'}>{item.name}</Link></li>)
+                           return (<li key={key}><Link to={`/GenreHome/${item.id}`}>{item.name}</Link></li>)
                        })}
                        </ul>
                     </div>
                   </nav>
                   <Switch>
-                  {this.state.data.map(function(item, key) {
-                       //return (<Route exact path='./GenreHome' component={GenreHome} />)
-                   })}
+                    <Route exact path='/' component={Home}/>
+                    <Route path='/GenreHome/:genre_id' component={GenreHome}/>
                   </Switch>
                 </div>
               </Router>
