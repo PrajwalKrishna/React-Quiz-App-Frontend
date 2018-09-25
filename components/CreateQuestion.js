@@ -11,6 +11,10 @@ class CreateQuestion extends Component {
           answer:"",
           multi:true,
           score: parseInt(0,10),
+          option_a:"Type Option A",
+          option_b:"Type Option B",
+          option_c:"Type Option C",
+          option_d:"Type Option D",
       },
       submitted: false,
       response: []
@@ -19,6 +23,10 @@ class CreateQuestion extends Component {
     this.handleSChange = this.handleSChange.bind(this);
     this.handleAChange = this.handleAChange.bind(this);
     this.handleMChange = this.handleMChange.bind(this);
+    this.handleOpAChange = this.handleOpAChange.bind(this);
+    this.handleOpBChange = this.handleOpBChange.bind(this);
+    this.handleOpCChange = this.handleOpCChange.bind(this);
+    this.handleOpDChange = this.handleOpDChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -48,12 +56,32 @@ class CreateQuestion extends Component {
   }
   handleMChange(event) {
     let tempVar = {...this.state.formData};
-    tempVar.multi = (event.target.value == 'true');
+    tempVar.multi = (event.target.value === 'true');
     this.setState({formData:tempVar})
   }
   handleSChange(event) {
     let tempVar = {...this.state.formData};
     tempVar.score = parseInt(event.target.value,10);
+    this.setState({formData:tempVar})
+  }
+  handleOpAChange(event) {
+    let tempVar = {...this.state.formData};
+    tempVar.option_a = event.target.value;
+    this.setState({formData:tempVar})
+  }
+  handleOpBChange(event) {
+    let tempVar = {...this.state.formData};
+    tempVar.option_b = event.target.value;
+    this.setState({formData:tempVar})
+  }
+  handleOpCChange(event) {
+    let tempVar = {...this.state.formData};
+    tempVar.option_c = event.target.value;
+    this.setState({formData:tempVar})
+  }
+  handleOpDChange(event) {
+    let tempVar = {...this.state.formData};
+    tempVar.option_d = event.target.value;
     this.setState({formData:tempVar})
   }
 
@@ -79,6 +107,17 @@ class CreateQuestion extends Component {
                 <input type="radio" name="typeOfQuestion" value={false} onChange={this.handleMChange}/>
             </div>
             <div className="form-group">
+                <label>Options</label>
+                <input type="radio" name="typeOfQuestion" value='a' onChange={this.handleAnsChange}/>
+                <input type="text" className="form-control" value={this.state.option_a} onChange={this.handleOpAChange}/>
+                <input type="radio" name="typeOfQuestion" value='b' onChange={this.handleAnsChange}/>
+                <input type="text" className="form-control" value={this.state.option_b} onChange={this.handleOpBChange}/>
+                <input type="radio" name="typeOfQuestion" value='c' onChange={this.handleAnsChange}/>
+                <input type="text" className="form-control" value={this.state.option_c} onChange={this.handleOpCChange}/>
+                <input type="radio" name="typeOfQuestion" value='d' onChange={this.handleAnsChange}/>
+                <input type="text" className="form-control" value={this.state.option_d} onChange={this.handleOpDChange}/>
+            </div>
+            <div className="form-group">
                 <label>Answer</label>
                 <input type="text" className="form-control" value={this.state.answer} onChange={this.handleAChange}/>
             </div>
@@ -98,7 +137,6 @@ class CreateQuestion extends Component {
             </h2>
           </div>
         }
-
       </div>
     );
   }

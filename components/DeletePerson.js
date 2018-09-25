@@ -15,7 +15,7 @@ class DeletePerson extends Component {
 
 // Lifecycle hook, runs after component has mounted onto the DOM structure
 componentDidMount() {
-  const request = new Request('http://127.0.0.1:9080/people/');
+  const request = new Request('http://127.0.0.1:8080/user/');
   fetch(request)
     .then(response => response.json())
       .then(data => this.setState({data: data}));
@@ -29,7 +29,7 @@ handleCheck(event){
 
 //Handle task of communicating with backend for deletion
   handleSubmit (event) {
-  fetch('http://localhost:8080/people/'+this.state.id, {
+  fetch('http://localhost:8080/user/'+this.state.id, {
    method: 'DELETE',
  })
     .then(response => {
@@ -53,17 +53,13 @@ handleCheck(event){
                 <tr>
                   <th>Select</th>
                   <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>City</th>
                 </tr>
               </thead>
               <tbody>{this.state.data.map(function(item, key) {
                    return (
                   <tr key = {key}>
                       <td><input type="radio" name="toBeDeleted" value={item.id} onChange={this.handleCheck}/></td>
-                      <td>{item.firstname}</td>
-                      <td>{item.lastname}</td>
-                      <td>{item.city}</td>
+                      <td>{item.username}</td>
                   </tr>
                     )
                 },this)}

@@ -8,6 +8,7 @@ import Home from './Home';
 import ViewGenre from './ViewGenre';
 
 import GlobalLeaderBoard from './GlobalLeaderBoard'
+import UserHome from './UserHome'
 
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
@@ -15,7 +16,8 @@ class App extends Component {
     constructor(props) {
     super(props);
     this.state = {
-      ADMIN : true
+      ADMIN : true,
+      user_id : 15,
     }
     //console.log(this.isADMIN());
     this.isADMIN = this.isADMIN.bind(this)
@@ -39,6 +41,7 @@ class App extends Component {
                   <li><Link to={'/ViewPeople'}>View People</Link></li>
                   <li><Link to={'/ViewGenre'}>View Genre</Link></li>
                   <li><Link to={'/GlobalLeaderBoard'}>LeaderBoard</Link></li>
+                  <li><Link to={`/UserHome/${this.state.user_id}`}>UserHome</Link></li>
                 </ul>
               </div>
             </nav>
@@ -50,6 +53,7 @@ class App extends Component {
                  <Route exact path='/ViewPeople' component={ViewPeople} />
                  <Route exact path='/ViewGenre' component={ViewGenre} />
                  <Route exact path='/GlobalLeaderBoard' component={GlobalLeaderBoard} />
+                 <Route exact path='/UserHome/:user_id' component={UserHome} />
             </Switch>
           </div>
         </Router>

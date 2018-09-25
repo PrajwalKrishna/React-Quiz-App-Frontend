@@ -14,6 +14,7 @@ class GenreHome extends Component{
       identity:[],
       genre_id:props.match.params.genre_id,
       quizes:[],
+      rankList:[],
       ADMIN : true,
     }
     //console.log(props);
@@ -31,6 +32,12 @@ class GenreHome extends Component{
     fetch(request2)
       .then(response => response.json())
         .then(quizes => this.setState({quizes: quizes}));
+        /*const request2 = new Request('http://127.0.0.1:8080/genreList/');
+        fetch(request)
+          .then(response => response.json())
+            .then(rankList => this.setState({rankList: rankList}));
+         */
+
   }
 
   render() {
@@ -39,7 +46,27 @@ class GenreHome extends Component{
         <header className="App-header">
           <h1 className="App-title">List of all quizes</h1>
         </header>
-              <Router>
+            <table className="table-hover">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>User Name</th>
+                  <th>Total Score</th>
+                </tr>
+              </thead>
+              <tbody>{this.state.rankList.map(function(item, key) {
+                   return (
+                      <tr key = {key}>
+                          <td>{key+1}</td>
+                          <td>{item.id}</td>
+                          <td>{item.user_id}</td>
+                          <td>{item.score}</td>
+                      </tr>
+                    )
+                })}
+              </tbody>
+           </table>
+           <Router>
                 <div>
                   <nav className="navbar navbar-default">
                     <div className="container-fluid">

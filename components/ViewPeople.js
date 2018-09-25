@@ -11,7 +11,7 @@ class ViewPeople extends Component {
 
   // Lifecycle hook, runs after component has mounted onto the DOM structure
   componentDidMount() {
-    const request = new Request('http://127.0.0.1:9080/people/');
+    const request = new Request('http://127.0.0.1:8080/user/');
     fetch(request)
       .then(response => response.json())
         .then(data => this.setState({data: data}));
@@ -27,19 +27,17 @@ class ViewPeople extends Component {
         <table className="table-hover">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>City</th>
+              <th>Serial</th>
+              <th>User Name</th>
+              <th>Id</th>
             </tr>
           </thead>
           <tbody>{this.state.data.map(function(item, key) {
                return (
                   <tr key = {key}>
+                      <td>{key+1}</td>
+                      <td>{item.username}</td>
                       <td>{item.id}</td>
-                      <td>{item.firstname}</td>
-                      <td>{item.lastname}</td>
-                      <td>{item.city}</td>
                   </tr>
                 )
              })}
