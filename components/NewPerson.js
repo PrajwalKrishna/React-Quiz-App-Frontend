@@ -20,7 +20,7 @@ class NewPerson extends Component {
 
   handleSubmit (event) {
     event.preventDefault();
-    fetch('http://localhost:8080/people', {
+    fetch('http://localhost:9080/people', {
      method: 'POST',
      body: JSON.stringify(this.state.formData),
    })
@@ -31,13 +31,13 @@ class NewPerson extends Component {
   }
 
   handleFChange(event) {
-    this.state.formData.firstName = event.target.value;
+      this.setState({formData:{firstName :event.target.value}});
   }
   handleLChange(event) {
-    this.state.formData.lastName = event.target.value;
+      this.setState({formData:{lastName :event.target.value}});
   }
   handleCChange(event) {
-    this.state.formData.city = event.target.value;
+      this.setState({formData:{city :event.target.value}});
   }
 
   render() {

@@ -3,13 +3,17 @@ import '../Stylesheet/ViewGenre.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import GenreHome from './GenreHome';
-import Home from './Home'
+import Home from './Home';
+
+import CreateGenre from './CreateGenre';
+import DeleteGenre from './DeleteGenre';
 
 class ViewGenres extends Component {
   constructor() {
     super();
     this.state = {
-      data: []
+      data: [],
+      ADMIN : true,
     }
   }
 
@@ -38,12 +42,16 @@ class ViewGenres extends Component {
                       {this.state.data.map(function(item, key) {
                            return (<li key={key}><Link to={`/GenreHome/${item.id}`}>{item.name}</Link></li>)
                        })}
+                       {this.state.ADMIN && <li><Link to='./CreateGenre'>CreateGenre</Link></li>}
+                       {this.state.ADMIN && <li><Link to='./DeleteGenre'>DeleteGenre</Link></li> }
                        </ul>
                     </div>
                   </nav>
                   <Switch>
                     <Route exact path='/' component={Home}/>
-                    <Route path='/GenreHome/:genre_id' component={GenreHome}/>
+                    <Route exact path='/GenreHome/:genre_id' component={GenreHome}/>
+                    {this.state.ADMIN && <Route exact path='/CreateGenre' component={CreateGenre}/>}
+                    {this.state.ADMIN && <Route exact path='/DeleteGenre' component={DeleteGenre}/>}
                   </Switch>
                 </div>
               </Router>

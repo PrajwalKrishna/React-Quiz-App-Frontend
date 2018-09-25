@@ -33,7 +33,6 @@ class QuizHome extends Component{
         </header>
               <Router>
                 <div>
-                {console.table(this.state.questions)}
                   <nav className="navbar navbar-default">
                     <div className="container-fluid">
                       <div className="navbar-header">
