@@ -12,6 +12,15 @@ import GlobalLeaderBoard from './GlobalLeaderBoard'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 class App extends Component {
+    constructor(props) {
+    super(props);
+    this.state = {
+      ADMIN : true
+    }
+    //console.log(this.isADMIN());
+    this.isADMIN = this.isADMIN.bind(this)
+}
+  isADMIN(){return this.state.ADMIN;}
   render() {
     return (
       <div>

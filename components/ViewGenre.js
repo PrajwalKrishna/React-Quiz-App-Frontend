@@ -9,12 +9,15 @@ import CreateGenre from './CreateGenre';
 import DeleteGenre from './DeleteGenre';
 
 class ViewGenres extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       data: [],
       ADMIN : true,
     }
+    //console.log("helooe");
+    //console.log(this.props.isADMIN);
+    //console.log("bye");
   }
 
   // Lifecycle hook, runs after component has mounted onto the DOM structure
@@ -42,8 +45,8 @@ class ViewGenres extends Component {
                       {this.state.data.map(function(item, key) {
                            return (<li key={key}><Link to={`/GenreHome/${item.id}`}>{item.name}</Link></li>)
                        })}
-                       {this.state.ADMIN && <li><Link to='./CreateGenre'>CreateGenre</Link></li>}
-                       {this.state.ADMIN && <li><Link to='./DeleteGenre'>DeleteGenre</Link></li> }
+                       {this.state.ADMIN && <li><Link to='/CreateGenre'>CreateGenre</Link></li>}
+                       {this.state.ADMIN && <li><Link to='/DeleteGenre'>DeleteGenre</Link></li> }
                        </ul>
                     </div>
                   </nav>

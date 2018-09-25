@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import '../Stylesheet/ViewGenre.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
+import CreateQuestion from './CreateQuestion';
+import DeleteQuestion from './DeleteQuestion';
+
+import Home from './Home'
+
 class QuizHome extends Component{
   constructor(params) {
     super();
@@ -9,7 +14,8 @@ class QuizHome extends Component{
       identity:[],
       genre_id:params.match.params.genre_id,
       quiz_id:params.match.params.quiz_id,
-      questions:[]
+      questions:[],
+      ADMIN : true,
     }
   }
 
@@ -42,14 +48,16 @@ class QuizHome extends Component{
                       {this.state.questions.map(function(item, key) {
                            return (<li key = {key}><Link to={`/quiz/${this.state.genre_id}/${item.id}`}>{item.question}</Link></li>)
                        },this)}
+                       {this.state.ADMIN && <li><Link to={`/CreateQuestion/${this.state.quiz_id}`}>CreateQuestion</Link></li>}
+                       {this.state.ADMIN && <li><Link to={`/DeleteQuestion/${this.state.quiz_id}`}>DeleteQuestion</Link></li> }
                        </ul>
                     </div>
                   </nav>
                   <Switch>
-                  {
-                     //<Route exact path='/' component={Home}/>
-                    //<Route  path='./QuizHome/:genre_id/:quiz_id' component={QuizHome} />
-                  }
+                     <Route exact path='/' component={Home}/>
+                     <Route exact path='/QuizHome/:genre_id/:quiz_id' component={QuizHome} />
+                     {this.state.ADMIN && <Route exact path='/CreateQuestion/:quiz_id' component={CreateQuestion}/>}
+                     {this.state.ADMIN && <Route exact path='/DeleteQuestion/:quiz_id' component={DeleteQuestion}/>}
                   </Switch>
                 </div>
               </Router>
