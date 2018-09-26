@@ -6,9 +6,19 @@ import NewPerson from './NewPerson';
 import Home from './Home';
 
 import ViewGenre from './ViewGenre';
-
 import GlobalLeaderBoard from './GlobalLeaderBoard'
 import UserHome from './UserHome'
+import GenreHome from './GenreHome'
+import CreateGenre from './CreateGenre'
+import DeleteGenre from './DeleteGenre'
+import QuizHome from './QuizHome'
+import CreateQuiz from './CreateQuiz'
+import DeleteQuiz from './DeleteQuiz'
+import CreateQuestion from './CreateQuestion';
+import DeleteQuestion from './DeleteQuestion';
+import QuestionHome from './QuestionHome';
+
+
 
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
@@ -54,6 +64,15 @@ class App extends Component {
                  <Route exact path='/ViewGenre' component={ViewGenre} />
                  <Route exact path='/GlobalLeaderBoard' component={GlobalLeaderBoard} />
                  <Route exact path='/UserHome/:user_id' component={UserHome} />
+                 <Route exact path='/GenreHome/:genre_id' component={GenreHome}/>
+                 <Route path='/question/:genre_id/:quiz_id' component={QuizHome}/>
+                 <Route exact path='/QuestionHome/:genre_id/:quiz_id/:question_id' component={QuestionHome} />
+                 {this.state.ADMIN && <Route exact path='/CreateQuestion/:quiz_id' component={CreateQuestion}/>}
+                 {this.state.ADMIN && <Route exact path='/DeleteQuestion/:quiz_id' component={DeleteQuestion}/>}
+                 {this.state.ADMIN && <Route exact path='/CreateQuiz/:genre_id' component={CreateQuiz}/>}
+                 {this.state.ADMIN && <Route exact path='/DeleteQuiz/:genre_id' component={DeleteQuiz}/>}
+                 {this.state.ADMIN && <Route exact path='/CreateGenre' component={CreateGenre}/>}
+                 {this.state.ADMIN && <Route exact path='/DeleteGenre' component={DeleteGenre}/>}
             </Switch>
           </div>
         </Router>

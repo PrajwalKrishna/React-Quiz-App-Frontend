@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import '../Stylesheet/ViewGenre.css';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import QuizHome from './QuizHome'
-import Home from './Home'
-
-import CreateQuiz from './CreateQuiz'
-import DeleteQuiz from './DeleteQuiz'
+import { Link } from 'react-router-dom';
 
 class GenreHome extends Component{
   constructor(props) {
@@ -13,13 +8,11 @@ class GenreHome extends Component{
     this.state = {
       identity:[],
       genre_id:props.match.params.genre_id,
+      user_id:5,
       quizes:[],
       rankList:[],
       ADMIN : true,
     }
-    //console.log(props);
-    //console.log(this.state.genre_id);
-    //console.log(Component.state);
   }
 
   // Lifecycle hook, runs after component has mounted onto the DOM structure
@@ -32,25 +25,24 @@ class GenreHome extends Component{
     fetch(request2)
       .then(response => response.json())
         .then(quizes => this.setState({quizes: quizes}));
-        /*const request2 = new Request('http://127.0.0.1:8080/genreList/');
-        fetch(request)
-          .then(response => response.json())
-            .then(rankList => this.setState({rankList: rankList}));
-         */
-
+    const request3 = new Request(`http://127.0.0.1:8080/leaderboard/${this.state.genre_id}`);
+    fetch(request3)
+      .then(response => response.json())
+        .then(rankList => this.setState({rankList: rankList}));
   }
 
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">List of all quizes</h1>
+          <h1 className="App-title">Score Board</h1>
         </header>
             <table className="table-hover">
               <thead>
                 <tr>
                   <th>Rank</th>
                   <th>User Name</th>
+                  <th>user_id</th>
                   <th>Total Score</th>
                 </tr>
               </thead>
@@ -58,15 +50,17 @@ class GenreHome extends Component{
                    return (
                       <tr key = {key}>
                           <td>{key+1}</td>
+                          <td>{item.user_name}</td>
                           <td>{item.id}</td>
-                          <td>{item.user_id}</td>
-                          <td>{item.score}</td>
+                          <td>{item.total}</td>
                       </tr>
                     )
                 })}
               </tbody>
            </table>
-           <Router>
+           <div className="App">
+           <h1 className="App-title">List of Quizes</h1>
+           </div>
                 <div>
                   <nav className="navbar navbar-default">
                     <div className="container-fluid">
@@ -82,14 +76,7 @@ class GenreHome extends Component{
                        </ul>
                     </div>
                   </nav>
-                  <Switch>
-                    <Route exact path='/' component={Home}/>
-                    <Route path='/question/:genre_id/:quiz_id' component={QuizHome}/>
-                    {this.state.ADMIN && <Route exact path='/CreateQuiz/:genre_id' component={CreateQuiz}/>}
-                    {this.state.ADMIN && <Route exact path='/DeleteQuiz/:genre_id' component={DeleteQuiz}/>}
-                  </Switch>
-                </div>
-              </Router>
+            </div>
       </div>
     );
   }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../Stylesheet/ViewGenre.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import QuizHome from './QuizHome'
 
 
 class UserHome extends Component{
@@ -13,9 +12,6 @@ class UserHome extends Component{
       quizes:[],
       ADMIN : true,
     }
-    //console.log(props);
-    //console.log(this.state.genre_id);
-    //console.log(Component.state);
   }
 
   // Lifecycle hook, runs after component has mounted onto the DOM structure
@@ -41,7 +37,6 @@ class UserHome extends Component{
             <tr>
               <th>Serial</th>
               <th>Quiz Number</th>
-              <th>Quiz Name</th>
               <th>Score</th>
             </tr>
           </thead>
@@ -49,8 +44,7 @@ class UserHome extends Component{
                return (
                   <tr key = {key}>
                       <td>{key+1}</td>
-                      <td>{item.quiz_id}</td>
-                      <td>{item.quiz_name}</td>
+                      <td>{item.Title}</td>
                       <td>{item.score}</td>
                   </tr>
                 )
