@@ -72,10 +72,12 @@ class GenreHome extends Component{
                 })}
               </tbody>
            </table>
-           <div className="App">
-           <h1 className="App-title">List of Quizes</h1>
-           </div>
-           {this.localStorageIsLoggedIn() && 
+           {this.localStorageIsLoggedIn() &&
+               <div className="App">
+               <h1 className="App-title">List of Quizes</h1>
+               </div>
+           }
+           {this.localStorageIsLoggedIn() &&
                <div>
                   <nav className="navbar navbar-default">
                     <div className="container-fluid">
