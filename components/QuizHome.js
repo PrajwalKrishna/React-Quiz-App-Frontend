@@ -11,10 +11,23 @@ class QuizHome extends Component{
       genre_id:params.match.params.genre_id,
       quiz_id:params.match.params.quiz_id,
       questions:[],
-      ADMIN : true,
     }
+    this.localStorageIsAdmin= this.localStorageIsAdmin.bind(this);
+    this.localStorageIsLoggedIn = this.localStorageIsLoggedIn.bind(this);
+    this.localStorageGiveUserId = this.localStorageGiveUserId.bind(this);
   }
-
+  localStorageIsAdmin(){
+      let Auth = JSON.parse(localStorage["auther"]);
+      return Auth.admin
+  }
+  localStorageIsLoggedIn(){
+      let Auth = JSON.parse(localStorage["auther"]);
+      return Auth.logged_in
+  }
+  localStorageGiveUserId(){
+      let Auth = JSON.parse(localStorage["auther"]);
+      return Auth.user_id
+  }
   // Lifecycle hook, runs after component has mounted onto the DOM structure
   componentDidMount() {
     const request = new Request(`http://127.0.0.1:8080/quiz/${this.state.quiz_id}`);
@@ -43,8 +56,8 @@ class QuizHome extends Component{
                   {this.state.questions.map(function(item, key) {
                        return (<li key = {key}><Link to={`/QuestionHome/${this.state.genre_id}/${this.state.quiz_id}/${item.id}`}>{item.question}</Link></li>)
                    },this)}
-                   {this.state.ADMIN && <li><Link to={`/CreateQuestion/${this.state.quiz_id}`}>CreateQuestion</Link></li>}
-                   {this.state.ADMIN && <li><Link to={`/DeleteQuestion/${this.state.quiz_id}`}>DeleteQuestion</Link></li> }
+                   {this.localStorageIsAdmin() && <li><Link to={`/CreateQuestion/${this.state.quiz_id}`}>CreateQuestion</Link></li>}
+                   {this.localStorageIsAdmin() && <li><Link to={`/DeleteQuestion/${this.state.quiz_id}`}>DeleteQuestion</Link></li> }
                    </ul>
                 </div>
               </nav>

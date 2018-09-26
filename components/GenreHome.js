@@ -13,8 +13,22 @@ class GenreHome extends Component{
       rankList:[],
       ADMIN : true,
     }
+    this.localStorageIsAdmin= this.localStorageIsAdmin.bind(this);
+    this.localStorageIsLoggedIn = this.localStorageIsLoggedIn.bind(this);
+    this.localStorageGiveUserId = this.localStorageGiveUserId.bind(this);
   }
-
+  localStorageIsAdmin(){
+      let Auth = JSON.parse(localStorage["auther"]);
+      return Auth.admin
+  }
+  localStorageIsLoggedIn(){
+      let Auth = JSON.parse(localStorage["auther"]);
+      return Auth.logged_in
+  }
+  localStorageGiveUserId(){
+      let Auth = JSON.parse(localStorage["auther"]);
+      return Auth.user_id
+  }
   // Lifecycle hook, runs after component has mounted onto the DOM structure
   componentDidMount() {
     const request = new Request(`http://127.0.0.1:8080/genre/${this.state.genre_id}`);
@@ -61,7 +75,8 @@ class GenreHome extends Component{
            <div className="App">
            <h1 className="App-title">List of Quizes</h1>
            </div>
-                <div>
+           {this.localStorageIsLoggedIn() && 
+               <div>
                   <nav className="navbar navbar-default">
                     <div className="container-fluid">
                       <div className="navbar-header">
@@ -71,12 +86,13 @@ class GenreHome extends Component{
                       {this.state.quizes.map(function(item, key) {
                            return (<li key = {key}><Link to={`/question/${this.state.genre_id}/${item.id}`}>{item.title}</Link></li>)
                        },this)}
-                       {this.state.ADMIN && <li><Link to={`/CreateQuiz/${this.state.genre_id}`}>CreateQuiz</Link></li>}
-                       {this.state.ADMIN && <li><Link to={`/DeleteQuiz/${this.state.genre_id}`}>DeleteQuiz</Link></li> }
+                       {this.localStorageIsAdmin() && <li><Link to={`/CreateQuiz/${this.state.genre_id}`}>CreateQuiz</Link></li>}
+                       {this.localStorageIsAdmin() && <li><Link to={`/DeleteQuiz/${this.state.genre_id}`}>DeleteQuiz</Link></li> }
                        </ul>
                     </div>
                   </nav>
             </div>
+          }
       </div>
     );
   }

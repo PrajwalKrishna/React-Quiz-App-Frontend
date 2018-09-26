@@ -10,7 +10,12 @@ class SignIn extends Component {
         password: "",
         user_name:"",
       },
-      auth:{},
+      auth:{
+          user_id:null,
+          admin:false,
+          logged_in:false,
+          user_name:null,
+      },
       submitted: false,
     }
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -35,19 +40,21 @@ class SignIn extends Component {
           response.json().then(USER =>{
               let tempVar = {
               user_id : USER.id,
-              log_in : true,
+              logged_in : true,
               admin : USER.admin,
               user_name : USER.user_name,
              }
-             this.setState({auth:tempVar})
-             this.setState({USER:USER})
-             localStorage.setItem("auther",JSON.stringify(this.state.auth));
+             this.setState({auth:tempVar});
+             console.log(this.state.auth)
+             console.log(tempVar);
+             localStorage.setItem("auther",JSON.stringify(tempVar));
              window.location.reload();
-       })}
+       })
+   }
          else if(response.status==401){
              let tempVar = {
              id : null,
-             log_in : false,
+             logged_in : false,
              admin : false,
              user_name : "",
             }
@@ -92,9 +99,7 @@ class SignIn extends Component {
         </div>
 
         {this.state.submitted &&
-          <div>
-                {console.log(this.state.USER)}
-                {this.state.USER && <h2>Hi {this.state.USER.name}</h2>}
+          <div>}
                 <Redirect to='/' />
           </div>
         }

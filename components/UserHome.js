@@ -30,7 +30,7 @@ class UserHome extends Component{
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Home of {`${this.state.identity.username}`}</h1>
+          <h1 className="App-title">Home of {`${this.state.identity.user_name}`}</h1>
         </header>
         <table className="table-hover">
           <thead>
