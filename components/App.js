@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import DeletePerson from './DeletePerson';
 import ViewPeople from './ViewPeople';
 import EditPerson from './EditPerson';
-import NewPerson from './NewPerson';
+import SignUp from './SignUp';
+import SignIn from './SignIn';
 import Home from './Home';
 
 import ViewGenre from './ViewGenre';
@@ -45,7 +46,8 @@ class App extends Component {
                 </div>
                 <ul className="nav navbar-nav">
                   <li><Link to={'/'}>Home</Link></li>
-                  <li><Link to={'/NewPerson'}>Create Person</Link></li>
+                  <li><Link to={'/SignIn'}>SignIn</Link></li>
+                  <li><Link to={'/SignUp'}>SignUp</Link></li>
                   <li><Link to={'/EditPerson'}>Edit Person</Link></li>
                   <li><Link to={'/DeletePerson'}>Delete Person</Link></li>
                   <li><Link to={'/ViewPeople'}>View People</Link></li>
@@ -57,7 +59,8 @@ class App extends Component {
             </nav>
             <Switch>
                  <Route exact path='/' component={Home} />
-                 <Route exact path='/NewPerson' component={NewPerson} />
+                 <Route exact path='/SignIn' component={SignIn} />
+                 <Route exact path='/SignUp' component={SignUp} />
                  <Route exact path='/EditPerson' component={EditPerson} />
                  <Route exact path='/DeletePerson' component={DeletePerson} />
                  <Route exact path='/ViewPeople' component={ViewPeople} />

@@ -52,14 +52,18 @@ handleCheck(event){
               <thead>
                 <tr>
                   <th>Select</th>
-                  <th>First Name</th>
+                  <th>User Handle</th>
+                  <th>Name</th>
+                  <th>Email</th>
                 </tr>
               </thead>
               <tbody>{this.state.data.map(function(item, key) {
                    return (
                   <tr key = {key}>
                       <td><input type="radio" name="toBeDeleted" value={item.id} onChange={this.handleCheck}/></td>
-                      <td>{item.username}</td>
+                      <td>{item.user_name}</td>
+                      <td>{item.name}</td>
+                      <td>{item.email}</td>
                   </tr>
                     )
                 },this)}

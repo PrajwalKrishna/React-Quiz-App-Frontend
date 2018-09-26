@@ -28,16 +28,18 @@ class ViewPeople extends Component {
           <thead>
             <tr>
               <th>Serial</th>
+              <th>Handle</th>
               <th>User Name</th>
-              <th>Id</th>
+              <th>Email</th>
             </tr>
           </thead>
           <tbody>{this.state.data.map(function(item, key) {
                return (
                   <tr key = {key}>
                       <td>{key+1}</td>
-                      <td>{item.username}</td>
-                      <td>{item.id}</td>
+                      <td>{item.user_name}</td>
+                      <td>{item.name}</td>
+                      <td>{item.email}</td>
                   </tr>
                 )
              })}
